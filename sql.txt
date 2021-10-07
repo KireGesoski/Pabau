@@ -1,0 +1,46 @@
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+    name VARCHAR (32) NOT NULL,
+    email VARCHAR (32) NOT NULL,
+    password VARCHAR (32) NOT NULL,
+    type INT(10) DEFAULT 1,
+
+CONSTRAINT primary_key PRIMARY KEY (id)
+);
+
+CREATE TABLE phones (
+    id INT UNSIGNED AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    phone_number INT NOT NULL,
+
+CONSTRAINT primary_key PRIMARY KEY (id),
+CONSTRAINT phones_kon_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE address (
+    id INT UNSIGNED AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    address VARCHAR(64) NOT NULL,
+
+CONSTRAINT primary_key PRIMARY KEY (id),
+CONSTRAINT address_kon_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE medical_conditions (
+    id INT UNSIGNED AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    medical_condition VARCHAR(640) NOT NULL,
+    blood_type VARCHAR (16) NOT NULL,
+
+CONSTRAINT primary_key PRIMARY KEY (id),
+CONSTRAINT medical_condition_kon_users FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);   
+
+________________________________________________________________________________
+INSERT INTO users (name,email,password,type) VALUES ('Doctor Pabau', 'doctor@pabau.com','doctor123',0),('Irena Irenovska','irena@abc.com','pass1',1),('Igor Ivanovski','igor@abc.com','pass2',1),('Mite Mitevski','mite@abc.com','pass3',1),('Ane Anevski','ane@abc.com','pass4',1),('Olga Olevska','olga@abc.com','pass5',1),('Riste Risteski','riste@abc.com','pass6',1),('Ana Aneva','ana@abc.com','pass7',1),('Marija Marievska','marija@abc.com','pass8',1),('Krste Krstevski','krste@abc.com','pass9',1),('Biljana Bilevska','biljana@abc.com','pass10',1);
+
+INSERT INTO phones (user_id,phone_number) VALUES (1,0211341),(2,0211342),(3,0211343),(4,0211344),(5,0211345),(6,0211346),(7,0211347),(8,0211348),(9,0211349),(10,02113410),(11,02113411);
+
+INSERT INTO address (user_id,address) VALUES (1,'1 street,Skopje'),(2,'2 street,Skopje'),(3,'3 street,Skopje'),(4,'4 street,Skopje'),(5,'5 street,Skopje'),(6,'6 street,Skopje'),(7,'7 street,Skopje'),(8,'8 street,Skopje'),(9,'9 street,Skopje'),(10,'10 street,Skopje'),(11,'11 street,Skopje');
+
+INSERT INTO medical_conditions (user_id,medical_condition,blood_type) VALUES (1,'good','a'),(2,'good','b'),(3,'good','ab'),(4,'good','o'),(5,'good','a'),(6,'good','o-'),(7,'good','ab'),(8,'good','b'),(9,'good','ab'),(10,'good','a'),(11,'good','b');
